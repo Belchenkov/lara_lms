@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 
 Route::group([
-    'middleware' => 'guest',
+    'middleware' => 'guest:admin',
     'prefix' => 'admin',
     'as' => 'admin.'
 ], function () {
@@ -39,7 +39,11 @@ Route::group([
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::group([
+    'middleware' => 'auth:admin',
+    'prefix' => 'admin',
+    'as' => 'admin.',
+], function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
