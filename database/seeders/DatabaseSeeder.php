@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         app()->call(AdminSeeder::class);
+        app()->call(UserSeeder::class);
     }
 }
