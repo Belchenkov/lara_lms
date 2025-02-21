@@ -1,7 +1,7 @@
 <!--===========================
         FOOTER 3 START
     ============================-->
-<footer class="footer_3" style="background: url({{ asset('frontend/assets/images/footer_3_bg.jpg' }});">
+<footer class="footer_3" style="background: url({{ asset('frontend/assets/images/footer_3_bg.jpg') }});">
     <div class="footer_3_overlay pt_120 xs_pt_100">
         <div class="wsus__footer_bottom">
             <div class="container">

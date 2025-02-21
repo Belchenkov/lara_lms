@@ -31,67 +31,27 @@
 
 <body class="home_3">
 
-
-<!--============ PRELOADER START ===========-->
+{{-- Preloader --}}
 <div id="preloader">
     <div class="preloader_icon">
         <img src="{{ asset('frontend/assets/images/preloader.png') }}" alt="Preloader" class="img-fluid">
     </div>
 </div>
-<!--============ PRELOADER START ===========-->
 
 {{-- Header --}}
 @include('frontend.layouts.header')
 
-{{-- Hero Section --}}
-@include('frontend.pages.home.sections.hero-section')
-
-{{-- Category Section  --}}
-@include('frontend.pages.home.sections.category-section')
-
-{{-- About Section  --}}
-@include('frontend.pages.home.sections.about-section')
-
-{{-- Courses Section  --}}
-@include('frontend.pages.home.sections.courses-section')
-
-{{-- Offer Section  --}}
-@include('frontend.pages.home.sections.offer-section')
-
-{{-- BECOME INSTRUCTOR Section  --}}
-@include('frontend.pages.home.sections.become-instructor-section')
-
-{{-- Video Section  --}}
-@include('frontend.pages.home.sections.video-section')
-
-{{-- Brand Section  --}}
-@include('frontend.pages.home.sections.brand-section')
-
-
-{{-- Quality Section  --}}
-@include('frontend.pages.home.sections.quality-course-section')
-
-{{-- Testimonial Section  --}}
-@include('frontend.pages.home.sections.testimonial-section')
-
-{{-- Blog Section  --}}
-@include('frontend.pages.home.sections.blog-section')
+@yield('content')
 
 {{-- Footer Section  --}}
 @include('frontend.layouts.footer')
 
-<!--================================
-        SCROLL BUTTON START
-    =================================-->
+{{-- SCROLL BUTTON --}}
 <div class="progress-wrap">
     <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
         <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
     </svg>
 </div>
-<!--================================
-        SCROLL BUTTON END
-    =================================-->
-
 
 <!--jquery library js-->
 <script src="{{ asset('frontend/assets/js/jquery-3.7.1.min.js') }}"></script>

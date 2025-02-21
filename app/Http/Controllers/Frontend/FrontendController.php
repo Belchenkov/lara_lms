@@ -10,7 +10,7 @@ class FrontendController extends Controller
 {
     public function index(): View
     {
-        return view('frontend.layouts.master');
+        return view('frontend.pages.home.index');
     }
 }
 
