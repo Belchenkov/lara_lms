@@ -5,6 +5,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'resources/css/frontend.css',
                 'resources/css/app.css',
                 'resources/js/admin/login.js',
                 'resources/js/app.js',
