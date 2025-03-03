@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ApproveStatus;
 use App\Enums\Roles;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->text('bio')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();
+            $table->string('document')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('facebook')->nullable();
@@ -28,7 +30,12 @@ return new class extends Migration
             $table->string('linkedin')->nullable();
             $table->string('website')->nullable();
             $table->string('github')->nullable();
-            $table->enum('login_as', [[Roles::INSTRUCTOR->value, Roles::STUDENT->value]])->nullable();
+            $table->enum('approve_status', [
+                    ApproveStatus::PENDING->value,
+                    ApproveStatus::APPROVED->value,
+                    ApproveStatus::REJECTED->value,
+            ])->default(ApproveStatus::PENDING->value);
+            $table->enum('login_as', [Roles::INSTRUCTOR->value, Roles::STUDENT->value])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
