@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\ApproveStatus;
 use App\Enums\Roles;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -36,18 +37,27 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $user_role =  Roles::STUDENT->value;
+        $approve_status = ApproveStatus::APPROVED->value;
+
+        if ($request->type === Roles::INSTRUCTOR->value) {
+            $user_role = Roles::INSTRUCTOR->value;
+            $approve_status = ApproveStatus::PENDING->value;
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => Roles::STUDENT->value,
+            'role' => $user_role,
+            'approve_status' =>$approve_status,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return $request->user()->role === 'instructor'
+        return $request->user()->role === Roles::INSTRUCTOR->value
             ? redirect()->intended(route('instructor.dashboard', absolute: false))
             : redirect()->intended(route('student.dashboard', absolute: false));
     }
