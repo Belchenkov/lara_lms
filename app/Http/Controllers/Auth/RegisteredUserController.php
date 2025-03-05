@@ -43,6 +43,12 @@ class RegisteredUserController extends Controller
         if ($request->type === Roles::INSTRUCTOR->value) {
             $user_role = Roles::INSTRUCTOR->value;
             $approve_status = ApproveStatus::PENDING->value;
+
+            $request->validate(['document' => ['required', 'mimes:pdf,doc,docx,jpg,png', 'max:12000']]);
+        }
+
+        if (!in_array($request->type,[Roles::INSTRUCTOR->value, Roles::STUDENT->value], true)) {
+            abort(403);
         }
 
         $user = User::create([
