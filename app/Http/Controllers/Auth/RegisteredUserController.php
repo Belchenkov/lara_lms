@@ -7,15 +7,17 @@ use App\Enums\Roles;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Traits\FileUpload;
 
 class RegisteredUserController extends Controller
 {
+    use FileUpload;
+
     /**
      * Display the registration view.
      */
@@ -39,12 +41,14 @@ class RegisteredUserController extends Controller
 
         $user_role =  Roles::STUDENT->value;
         $approve_status = ApproveStatus::APPROVED->value;
+        $file_path = null;
 
         if ($request->type === Roles::INSTRUCTOR->value) {
             $user_role = Roles::INSTRUCTOR->value;
             $approve_status = ApproveStatus::PENDING->value;
 
-            $request->validate(['document' => ['required', 'mimes:pdf,doc,docx,jpg,png', 'max:12000']]);
+            $request->validate(['document' => ['required', 'max:12000']]);
+            $file_path = $this->uploadFile($request->file('document'));
         }
 
         if (!in_array($request->type,[Roles::INSTRUCTOR->value, Roles::STUDENT->value], true)) {
@@ -56,7 +60,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $user_role,
-            'approve_status' =>$approve_status,
+            'approve_status' => $approve_status,
+            'document' => $file_path,
         ]);
 
         event(new Registered($user));
