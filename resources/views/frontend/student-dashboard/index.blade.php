@@ -150,6 +150,12 @@
                     </div>
                 </div>
                 <div class="col-xl-9 col-md-8">
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                        <div>
+                            Hi, <strong>{{ auth()->user()->name }}</strong>, your instructor request is currently pending.
+                            We will send a mail on your email it will be approved.
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xl-4 col-sm-6 wow fadeInUp">
                             <div class="wsus__dash_earning">
