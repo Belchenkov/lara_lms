@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}">
 
+    @vite(['resources/css/admin.css.css'])
     @vite(['resources/css/frontend.css'])
 </head>
 
