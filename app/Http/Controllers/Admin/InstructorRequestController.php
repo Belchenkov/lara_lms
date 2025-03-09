@@ -2,18 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ApproveStatus;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class InstructorRequestController extends Controller
 {
+    public function __construct(
+        private readonly UserRepository $r_user,
+    )
+    {}
+
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        return view('admin.instructor-request.index');
+        $instructors_requests = $this->r_user->getByApprovedStatus(ApproveStatus::PENDING->value);
+
+        dd($instructors_requests);
+        return view('admin.instructor-request.index', compact('instructors_requests'));
     }
 
     /**
