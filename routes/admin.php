@@ -36,11 +36,13 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth:admin',
+    //'middleware' => 'auth:admin',
     'prefix' => 'admin',
     'as' => 'admin.',
 ], function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('instructor-requests', InstructorRequestController::class);
+
+    //Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
 
@@ -60,5 +62,4 @@ Route::group([
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-    Route::resource('instructor-requests', InstructorRequestController::class);
 });

@@ -23,7 +23,6 @@ class InstructorRequestController extends Controller
     {
         $instructors_requests = $this->r_user->getByApprovedStatus(ApproveStatus::PENDING->value);
 
-        dd($instructors_requests);
         return view('admin.instructor-request.index', compact('instructors_requests'));
     }
 
