@@ -43,15 +43,29 @@
                                         </a>
                                     </td>
                                     <td class="text-muted">
-                                        <form action="">
-                                            <select name="" id="" class="form-control">
-                                                <option value="{{\App\Enums\ApproveStatus::PENDING->value}}">
+                                        <form action="" class="status-{{ $instructor->id }}">
+                                            <select
+                                                name="status"
+                                                id="status"
+                                                class="form-control"
+                                                onchange="$('.status-{{ $instructor->id }}').submit()"
+                                            >
+                                                <option
+                                                    value="{{\App\Enums\ApproveStatus::PENDING->value}}"
+                                                    @selected($instructor->approve_status === \App\Enums\ApproveStatus::PENDING->value)
+                                                >
                                                     {{ ucfirst(\App\Enums\ApproveStatus::PENDING->value) }}
                                                 </option>
-                                                <option value="{{\App\Enums\ApproveStatus::APPROVED->value}}">
+                                                <option
+                                                    value="{{\App\Enums\ApproveStatus::APPROVED->value}}"
+                                                    @selected($instructor->approve_status === \App\Enums\ApproveStatus::APPROVED->value)
+                                                >
                                                     {{ ucfirst(\App\Enums\ApproveStatus::APPROVED->value) }}
                                                 </option>
-                                                <option value="{{\App\Enums\ApproveStatus::REJECTED->value}}">
+                                                <option
+                                                    value="{{\App\Enums\ApproveStatus::REJECTED->value}}"
+                                                    @selected($instructor->approve_status === \App\Enums\ApproveStatus::REJECTED->value)
+                                                >
                                                     {{ ucfirst(\App\Enums\ApproveStatus::REJECTED->value) }}
                                                 </option>
                                             </select>

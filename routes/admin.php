@@ -42,7 +42,7 @@ Route::group([
 ], function () {
     Route::resource('instructor-requests', InstructorRequestController::class);
 
-    //Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('verify-email', EmailVerificationPromptController::class)->name('verification.notice');
 
@@ -61,5 +61,4 @@ Route::group([
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
 });
