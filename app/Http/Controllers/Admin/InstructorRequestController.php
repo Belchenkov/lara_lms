@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\ApproveStatus;
+use App\Enums\Roles;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\InstructorUpdateRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class InstructorRequestController extends Controller
@@ -21,7 +24,10 @@ class InstructorRequestController extends Controller
      */
     public function index(): View
     {
-        $instructors_requests = $this->r_user->getByApprovedStatus(ApproveStatus::PENDING->value);
+        $instructors_requests = $this->r_user->getByApprovedStatuses([
+            ApproveStatus::PENDING->value,
+            ApproveStatus::REJECTED->value
+        ]);
 
         return view('admin.instructor-request.index', compact('instructors_requests'));
     }
@@ -61,9 +67,21 @@ class InstructorRequestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(InstructorUpdateRequest $request, User $instructor_request): RedirectResponse
     {
-        //
+        $validate = $request->validated();
+        $role = $validate['status'] === ApproveStatus::APPROVED->value
+            ? Roles::INSTRUCTOR->value
+            : Roles::STUDENT->value;
+
+        $this->r_user->updateByUser([
+            'approve_status' => $validate['status'],
+            'role' => $role,
+        ],
+            $instructor_request->id
+        );
+
+        return redirect()->back();
     }
 
     /**

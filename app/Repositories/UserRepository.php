@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Enums\ApproveStatus;
 use App\Models\User;
 use Illuminate\Support\Collection;
 use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
@@ -20,8 +21,13 @@ class UserRepository extends BaseRepository
         return User::class;
     }
 
-    public function getByApprovedStatus(string $status): Collection
+    public function getByApprovedStatuses(array $statuses): Collection
     {
-       return User::where('users.approve_status', $status)->get();
+       return User::whereIn('approve_status', $statuses)->get();
+    }
+
+    public function updateByUser(array $data, int $user_id): int
+    {
+        return User::where('id', $user_id)->update($data);
     }
 }

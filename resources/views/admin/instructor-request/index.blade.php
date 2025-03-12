@@ -32,6 +32,10 @@
                                             <span class="badge bg-yellow text-yellow-fg">
                                                 {{ ucfirst(\App\Enums\ApproveStatus::PENDING->value) }}
                                             </span>
+                                        @elseif($instructor->approve_status === \App\Enums\ApproveStatus::REJECTED->value)
+                                            <span class="badge bg-red text-yellow-fg">
+                                                {{ ucfirst(\App\Enums\ApproveStatus::REJECTED->value) }}
+                                            </span>
                                         @endif
                                     </td>
                                     <td class="text-secondary">
@@ -43,7 +47,13 @@
                                         </a>
                                     </td>
                                     <td class="text-muted">
-                                        <form action="" class="status-{{ $instructor->id }}">
+                                        <form
+                                            action="{{ route('admin.instructor-requests.update', $instructor->id) }}"
+                                            class="status-{{ $instructor->id }}"
+                                            method="POST"
+                                         >
+                                            @csrf
+                                            @method('PUT')
                                             <select
                                                 name="status"
                                                 id="status"
