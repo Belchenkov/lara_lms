@@ -91,4 +91,14 @@ class InstructorRequestController extends Controller
     {
         //
     }
+
+    /**
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * Download document from admin
+     */
+    public function downloadDoc(User $user): \Symfony\Component\HttpFoundation\BinaryFileResponse
+    {
+        return response()->download(public_path($user->document));
+    }
 }

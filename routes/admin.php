@@ -40,6 +40,8 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
 ], function () {
+    Route::get('instructor-doc-download/{user}', [InstructorRequestController::class, 'downloadDoc'])->name('instructor-doc-download');
+
     Route::resource('instructor-requests', InstructorRequestController::class);
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

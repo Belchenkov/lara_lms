@@ -42,7 +42,7 @@
                                         {{ ucfirst($instructor->role) }}
                                     </td>
                                     <td class="text-muted">
-                                        <a href="#">
+                                        <a href="{{ route('admin.instructor-doc-download', $instructor->id) }}">
                                             Download
                                         </a>
                                     </td>
