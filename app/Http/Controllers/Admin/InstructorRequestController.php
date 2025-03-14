@@ -6,6 +6,7 @@ use App\Enums\ApproveStatus;
 use App\Enums\Roles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InstructorUpdateRequest;
+use App\Mail\InstructorRequestApprovedMail;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\View;
@@ -80,6 +81,12 @@ class InstructorRequestController extends Controller
         ],
             $instructor_request->id
         );
+
+        $mail = \Mail::to($instructor_request->email);
+
+        (config('mail_queue.is_queue'))
+            ? $mail->queue(new InstructorRequestApprovedMail())
+            : $mail->send(new InstructorRequestApprovedMail());
 
         return redirect()->back();
     }
