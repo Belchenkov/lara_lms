@@ -6,17 +6,19 @@ use App\Enums\ApproveStatus;
 use App\Enums\Roles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\InstructorUpdateRequest;
-use App\Mail\InstructorRequestApprovedMail;
 use App\Models\User;
 use App\Repositories\UserRepository;
+use App\Services\SendNotifications;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class InstructorRequestController extends Controller
 {
     public function __construct(
         private readonly UserRepository $r_user,
+        private readonly SendNotifications $s_notifications,
     )
     {}
 
@@ -82,21 +84,12 @@ class InstructorRequestController extends Controller
             $instructor_request->id
         );
 
-        $mail = \Mail::to($instructor_request->email);
-
-        (config('mail_queue.is_queue'))
-            ? $mail->queue(new InstructorRequestApprovedMail())
-            : $mail->send(new InstructorRequestApprovedMail());
+        $this->s_notifications->sendNotification(
+            $validate['status'],
+            Mail::to($instructor_request->email)
+        );
 
         return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 
     /**
@@ -107,5 +100,10 @@ class InstructorRequestController extends Controller
     public function downloadDoc(User $user): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         return response()->download(public_path($user->document));
+    }
+
+    public static function sendNotification()
+    {
+
     }
 }
