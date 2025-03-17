@@ -23,6 +23,7 @@ Route::group([
     'prefix' => 'student'
 ], function () {
     Route::get('/dashboard', [StudentDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/become-instructor', [StudentDashboardController::class, 'becomeInstructor'])->name('become-instructor');
 });
 
 /** Instructor Routes */
