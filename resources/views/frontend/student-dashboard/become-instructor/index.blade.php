@@ -1,3 +1,5 @@
+@extends('frontend.layouts.master')
+
 @section('content')
     {{-- Breadcrumbs --}}
     <section class="wsus__breadcrumb" style="background: url({{ asset('frontend/assets/images/breadcrumb_bg.jpg') }});">
@@ -25,17 +27,26 @@
                 @include('frontend.student-dashboard.sidebar')
 
                 <div class="col-xl-9 col-md-8">
-                    <div class="text-end">
-                        <a href="" class="btn btn-primary">
+                    <div class="text-end mb-5">
+                        <a href="{{ route('student.become-instructor') }}" class="btn btn-primary">
                             Become an instructor
                         </a>
                     </div>
-                    <div class="row">
-                       <div class="card">
-                           <div class="card-body">
-                               test
-                           </div>
-                       </div>
+                    <div class="card">
+                        <div class="card-header">
+                            Become an Instructor
+                        </div>
+                        <div class="card-body">
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="document">Document</label>
+                                    <input type="file" class="" name="document">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
