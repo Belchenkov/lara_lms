@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Enums\ApproveStatus;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Instructor\InstructorBecomeUpdateRequest;
+use App\Models\User;
+use App\Repositories\UserRepository;
+use App\Traits\FileUpload;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class StudentDashboardController extends Controller
 {
+    use FileUpload;
+
+    public function __construct(
+        private readonly UserRepository $r_user,
+    )
+    {}
+
     public function index(): View
     {
         return view('frontend.student-dashboard.index');
@@ -16,5 +28,21 @@ class StudentDashboardController extends Controller
     public function becomeInstructor(): View
     {
         return view('frontend.student-dashboard.become-instructor.index');
+    }
+
+    public function becomeInstructorUpdate(InstructorBecomeUpdateRequest $request, User $user): RedirectResponse
+    {
+        $validate = $request->validated();
+
+        $file_path = $this->uploadFile($validate['document']);
+
+        $this->r_user->updateByUser([
+            'approve_status' => ApproveStatus::PENDING->value,
+            'document' => $file_path,
+        ],
+            $user->id
+        );
+
+        return redirect()->route('student.become-instructor');
     }
 }

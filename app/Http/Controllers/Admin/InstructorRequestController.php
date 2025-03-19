@@ -101,9 +101,4 @@ class InstructorRequestController extends Controller
     {
         return response()->download(public_path($user->document));
     }
-
-    public static function sendNotification()
-    {
-
-    }
 }

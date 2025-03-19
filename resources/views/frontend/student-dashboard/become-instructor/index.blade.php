@@ -37,10 +37,19 @@
                             Become an Instructor
                         </div>
                         <div class="card-body">
-                            <form action="">
+                            <form
+                                action="{{ route('student.become-instructor.update', auth()->id()) }}"
+                                method="POST"
+                                enctype="multipart/form-data"
+                            >
+                                @csrf
                                 <div class="form-group">
                                     <label for="document">Document</label>
-                                    <input type="file" class="" name="document">
+                                    <input
+                                        type="file"
+                                        name="document"
+                                    >
+                                    <x-input-error :messages="$errors->get('document')" class="mt-2" />
                                 </div>
                                 <div class="form-group mt-3">
                                     <button class="btn btn-primary" type="submit">Submit</button>
