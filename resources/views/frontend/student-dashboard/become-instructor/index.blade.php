@@ -28,8 +28,8 @@
 
                 <div class="col-xl-9 col-md-8">
                     <div class="text-end mb-5">
-                        <a href="{{ route('student.become-instructor') }}" class="btn btn-primary">
-                            Become an instructor
+                        <a href="{{ route('student.dashboard') }}" class="btn btn-primary">
+                            Back
                         </a>
                     </div>
                     <div class="card">

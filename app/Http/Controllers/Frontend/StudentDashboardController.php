@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Enums\ApproveStatus;
+use App\Enums\Roles;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Instructor\InstructorBecomeUpdateRequest;
 use App\Models\User;
@@ -27,6 +28,10 @@ class StudentDashboardController extends Controller
 
     public function becomeInstructor(): View
     {
+        if (auth()->user()->role === Roles::INSTRUCTOR->value) {
+            abort(403);
+        }
+
         return view('frontend.student-dashboard.become-instructor.index');
     }
 
