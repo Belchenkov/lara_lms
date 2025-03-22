@@ -16,7 +16,7 @@
         </div>
         <ul class="wsus__dashboard_sidebar_menu">
             <li>
-                <a href="" class="active">
+                <a href="{{ route('student.dashboard') }}" class="active">
                     <div class="img">
                         <img src="{{ asset('frontend/assets/images/dash_icon_8.png') }}" alt="icon" class="img-fluid w-100">
                     </div>
@@ -24,9 +24,9 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="{{ route('student.profile.index') }}">
                     <div class="img">
-                        <img src="{{ asset('frontend/assets/images/dash_icon_8.png') }}" alt="icon" class="img-fluid w-100">
+                        <img src="{{ asset('frontend/assets/images/dash_icon_1.png') }}" alt="icon" class="img-fluid w-100">
                     </div>
                     Profile
                 </a>
