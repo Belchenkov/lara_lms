@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Enums\ApproveStatus;
 use App\Enums\Roles;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Instructor\InstructorBecomeUpdateRequest;
+use App\Http\Requests\Instructor\StudentUpdateProfileRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Traits\FileUpload;
@@ -35,7 +35,7 @@ class StudentDashboardController extends Controller
         return view('frontend.student-dashboard.become-instructor.index');
     }
 
-    public function becomeInstructorUpdate(InstructorBecomeUpdateRequest $request, User $user): RedirectResponse
+    public function becomeInstructorUpdate(StudentUpdateProfileRequest $request, User $user): RedirectResponse
     {
         $validate = $request->validated();
 

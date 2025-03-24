@@ -26,6 +26,11 @@ class UserRepository extends BaseRepository
        return User::whereIn('approve_status', $statuses)->get();
     }
 
+    public function create(array $data): User
+    {
+        return User::create($data);
+    }
+
     public function updateByUser(array $data, int $user_id): int
     {
         return User::where('id', $user_id)->update($data);

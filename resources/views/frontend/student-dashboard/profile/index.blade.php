@@ -51,7 +51,12 @@
                             </div>
                         </div>
 
-                        <form action="#" class="wsus__dashboard_profile_update">
+                        <form
+                            action="{{ route('student.profile.update') }}"
+                            class="wsus__dashboard_profile_update"
+                            method="POST"
+                        >
+                            @csrf
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="wsus__dashboard_profile_update_info">
@@ -60,7 +65,9 @@
                                             type="text"
                                             placeholder="Enter your full name"
                                             name="name"
+                                            value="{{ auth()->user()->name }}"
                                         >
+                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
@@ -70,7 +77,9 @@
                                             type="text"
                                             placeholder="Enter your headline"
                                             name="headline"
+                                            value="{{ auth()->user()->headline }}"
                                         >
+                                        <x-input-error :messages="$errors->get('headline')" class="mt-2" />
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
@@ -80,17 +89,28 @@
                                             type="email"
                                             placeholder="Enter your email"
                                             name="email"
+                                            value="{{ auth()->user()->email }}"
                                         >
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="wsus__dashboard_profile_update_info">
                                         <label>Gender</label>
                                         <select name="gender" id="gender" class="form-control">
-                                            <option selected value="">Select</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                            <option
+                                                value=""
+                                            >Select</option>
+                                            <option
+                                                value="male"
+                                                @selected(auth()->user()->gender === 'male')
+                                            >Male</option>
+                                            <option
+                                                value="female"
+                                                @selected(auth()->user()->gender === 'female')
+                                            >Female</option>
                                         </select>
+                                        <x-input-error :messages="$errors->get('gender')" class="mt-2" />
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
@@ -100,7 +120,8 @@
                                             rows="7"
                                             placeholder="Your text here"
                                             name="about"
-                                        ></textarea>
+                                        >{{ auth()->user()->bio }}</textarea>
+                                        <x-input-error :messages="$errors->get('about')" class="mt-2" />
                                     </div>
                                 </div>
                                 <div class="col-xl-12">
