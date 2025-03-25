@@ -135,6 +135,63 @@
                     <div class="wsus__dashboard_contant">
                         <div class="wsus__dashboard_contant_top d-flex flex-wrap justify-content-between">
                             <div class="wsus__dashboard_heading">
+                                <h5>Update Your Email/Password</h5>
+                                <p>Add your new email or password here to update.</p>
+                            </div>
+                        </div>
+
+                        <form
+                            action="{{ route('student.profile.update') }}"
+                            class="wsus__dashboard_profile_update"
+                            method="POST"
+                        >
+                            @csrf
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="wsus__dashboard_profile_update_info">
+                                        <label>Email</label>
+                                        <input
+                                            type="email"
+                                            placeholder="Enter your email"
+                                            name="email"
+                                            value="{{ auth()->user()->email }}"
+                                        >
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="wsus__dashboard_profile_update_info">
+                                        <label>Password</label>
+                                        <input
+                                            type="password"
+                                            placeholder="Enter your new password"
+                                            name="password"
+                                        >
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="wsus__dashboard_profile_update_info">
+                                        <label>Confirm Password</label>
+                                        <input
+                                            type="password"
+                                            placeholder="Enter confirm password"
+                                            name="password_confirm"
+                                        >
+                                        <x-input-error :messages="$errors->get('password_confirm')" class="mt-2" />
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="wsus__dashboard_profile_update_btn">
+                                        <button type="submit" class="common_btn">Update Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="wsus__dashboard_contant">
+                        <div class="wsus__dashboard_contant_top d-flex flex-wrap justify-content-between">
+                            <div class="wsus__dashboard_heading">
                                 <h5>Update Social Information</h5>
                                 <p>Manage your courses and its update like live, draft and insight.</p>
                             </div>
