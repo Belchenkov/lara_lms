@@ -147,16 +147,15 @@
                         >
                             @csrf
                             <div class="row">
-                                <div class="col-xl-12">
+                                <div class="col-md-12">
                                     <div class="wsus__dashboard_profile_update_info">
-                                        <label>Email</label>
+                                        <label>Current Password</label>
                                         <input
-                                            type="email"
-                                            placeholder="Enter your email"
-                                            name="email"
-                                            value="{{ auth()->user()->email }}"
+                                            type="password"
+                                            placeholder="Enter your current password"
+                                            name="current_password"
                                         >
-                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                        <x-input-error :messages="$errors->get('current_password')" class="mt-2" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -183,7 +182,7 @@
                                 </div>
                                 <div class="col-xl-12">
                                     <div class="wsus__dashboard_profile_update_btn">
-                                        <button type="submit" class="common_btn">Update Profile</button>
+                                        <button type="submit" class="common_btn">Drop Password</button>
                                     </div>
                                 </div>
                             </div>

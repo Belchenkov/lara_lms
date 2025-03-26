@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Student\StudentUpdatePasswordRequest;
 use App\Http\Requests\Student\StudentUpdateProfileRequest;
 use App\Repositories\UserRepository;
 use Illuminate\Http\RedirectResponse;
@@ -16,11 +17,18 @@ class ProfileController extends Controller
     )
     {}
 
+    /**
+     * @return View
+     */
     public function index(): View
     {
         return view('frontend.student-dashboard.profile.index');
     }
 
+    /**
+     * @param StudentUpdateProfileRequest $request
+     * @return RedirectResponse
+     */
     public function update(StudentUpdateProfileRequest $request): RedirectResponse
     {
         $validated = $request->validated();
@@ -32,6 +40,19 @@ class ProfileController extends Controller
             'headline' => $validated['headline'],
             'gender' => $validated['gender'],
         ], auth()->id());
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param StudentUpdatePasswordRequest $request
+     * @return RedirectResponse
+     */
+    public function updatePassword(StudentUpdatePasswordRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $this->r_user->updateByUser(['password' => bcrypt($validated['password'])], auth()->id());
 
         return redirect()->back();
     }
