@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\StudentUpdatePasswordRequest;
 use App\Http\Requests\Student\StudentUpdateProfileRequest;
+use App\Http\Requests\Student\StudentUpdateSocialRequest;
 use App\Repositories\UserRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -53,6 +54,24 @@ class ProfileController extends Controller
         $validated = $request->validated();
 
         $this->r_user->updateByUser(['password' => bcrypt($validated['password'])], auth()->id());
+
+        return redirect()->back();
+    }
+
+    /**
+     * @param StudentUpdateSocialRequest $request
+     * @return RedirectResponse
+     */
+    public function updateSocial(StudentUpdateSocialRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $this->r_user->updateByUser([
+            'facebook' => $validated['facebook'],
+            'x' => $validated['x'],
+            'linkedin' => $validated['linkedin'],
+            'website' => $validated['website'],
+        ], auth()->id());
 
         return redirect()->back();
     }
