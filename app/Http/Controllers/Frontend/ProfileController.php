@@ -23,9 +23,17 @@ class ProfileController extends Controller
     /**
      * @return View
      */
-    public function index(): View
+    public function indexStudent(): View
     {
         return view('frontend.student-dashboard.profile.index');
+    }
+
+    /**
+     * @return View
+     */
+    public function indexInstructor(): View
+    {
+        return view('frontend.instructor-dashboard.profile.index');
     }
 
     /**
