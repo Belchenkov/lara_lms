@@ -58,6 +58,8 @@ class ProfileController extends Controller
             'image' => $avatar_path ?? null,
         ], auth()->id());
 
+        notyf()->success('Updated Successfully!');
+
         return redirect()->back();
     }
 
@@ -70,6 +72,8 @@ class ProfileController extends Controller
         $validated = $request->validated();
 
         $this->r_user->updateByUser(['password' => bcrypt($validated['password'])], auth()->id());
+
+        notyf()->success('Updated Successfully!');
 
         return redirect()->back();
     }
@@ -88,6 +92,8 @@ class ProfileController extends Controller
             'linkedin' => $validated['linkedin'],
             'website' => $validated['website'],
         ], auth()->id());
+
+        notyf()->success('Updated Successfully!');
 
         return redirect()->back();
     }
