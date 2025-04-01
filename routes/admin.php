@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\InstructorRequestController;
 use Illuminate\Support\Facades\Route;
@@ -63,4 +64,6 @@ Route::group([
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    Route::resourse('course-languages', CourseLanguageController::class);
 });
