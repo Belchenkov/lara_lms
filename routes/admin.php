@@ -65,5 +65,5 @@ Route::group([
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-    Route::resourse('course-languages', CourseLanguageController::class);
+    Route::resource('course-languages', CourseLanguageController::class);
 });
