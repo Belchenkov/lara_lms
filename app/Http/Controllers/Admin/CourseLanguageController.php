@@ -3,11 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Courses\CreateCourseRequest;
+use App\Repositories\CourseLanguageRepository;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CourseLanguageController extends Controller
 {
+    public function __construct(
+        private readonly CourseLanguageRepository $r_course_language
+    )
+    {}
+
     /**
      * Display a listing of the resource.
      */
@@ -27,9 +35,18 @@ class CourseLanguageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateCourseRequest $request): RedirectResponse
     {
-        //
+        $validate = $request->validated();
+
+        $this->r_course_language->create([
+            'name' => $validate['name'],
+            'slug' => \Str::slug($validate['name']),
+        ]);
+
+        notyf()->success('Created Successfully');
+
+        return redirect()->route('admin.course-languages.index');
     }
 
     /**
