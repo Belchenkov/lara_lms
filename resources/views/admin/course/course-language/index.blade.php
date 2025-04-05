@@ -17,14 +17,24 @@
                         <table class="table table-vcenter card-title">
                             <thead>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                            <th>Role</th>
-                            <th>Document</th>
+                            <th>Slug</th>
                             <th>Action</th>
                             </thead>
                             <tbody class="w-100">
-                                Empty
+                                @forelse($languages as $language)
+                                    <tr>
+                                        <td>{{ $language->name }}</td>
+                                        <td>{{ $language->slug }}</td>
+                                        <td>
+                                            <a href="" class="btn-sm btn-primary">Edit</a>
+                                            <a href="" class="btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3">No Data Found!</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
