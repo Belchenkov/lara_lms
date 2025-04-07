@@ -71,9 +71,17 @@ class CourseLanguageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreateCourseRequest $request, string $id)
     {
-        //
+        $validate = $request->validated();
+
+        $this->r_course_language->updateById($id, [
+            'name' => $validate['name'],
+        ]);
+
+        notyf()->success('Updated Successfully');
+
+        return redirect()->route('admin.course-languages.index');
     }
 
     /**
