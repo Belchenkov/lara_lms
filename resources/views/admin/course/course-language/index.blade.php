@@ -27,7 +27,14 @@
                                         <td>{{ $language->slug }}</td>
                                         <td>
                                             <a href="{{ route('admin.course-languages.edit', $language->id) }}" class="btn-sm btn-primary">Edit</a>
-                                            <a href="" class="btn-sm btn-danger">Delete</a>
+                                            <a
+                                                href="{{ route('admin.course-languages.destroy', $language->id) }}"
+                                                class="btn-sm btn-danger delete-item"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modal-danger"
+                                            >
+                                                Delete
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
