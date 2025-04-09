@@ -22,7 +22,7 @@ $('.delete-confirm').on('click', function(event) {
             _token: csrfToken,
         },
         beforeSend: function() {
-
+            $('.delete-confirm').text('Deleting...');
         },
         success: function(data){
 
