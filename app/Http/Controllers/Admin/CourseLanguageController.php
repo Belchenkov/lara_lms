@@ -92,6 +92,8 @@ class CourseLanguageController extends Controller
         try {
             $this->r_course_language->deleteById($course_language->id);
 
+            notyf()->success('Deleted Successfully! ');
+
             return response()->json([
                 'message' => 'Deleted Successfully!',
             ]);

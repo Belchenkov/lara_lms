@@ -7,6 +7,7 @@
     <meta name="csrf_token" content="{{ csrf_token() }}" />
     <title>Admin Dashboard.</title>
     <!-- CSS files -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link href="{{ asset('admin/assets/dist/css/tabler.min.css?1692870487') }}" rel="stylesheet"/>
     <link href="{{ asset('admin/assets/dist/css/demo.min.css?1692870487') }}" rel="stylesheet"/>
     <style>
@@ -159,7 +160,7 @@
     </div>
 </div>
 
-<!-- Tabler Core -->
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="{{ asset('admin/assets/dist/js/tabler.min.js?1692870487') }}'" defer></script>
 <script src="{{ asset('admin/assets/dist/js/demo.min.js?1692870487') }}" defer></script>
 </body>
