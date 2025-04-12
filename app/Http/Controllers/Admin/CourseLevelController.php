@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Courses\CreateLevelRequest;
-use App\Models\CourseLanguage;
-use App\Repositories\CourseLanguageRepository;
+use App\Http\Requests\Levels\CreateLevelRequest;
+use App\Models\CourseLevel;
+use App\Repositories\CourseLevelRepository;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
-class CourseLanguageController extends Controller
+class CourseLevelController extends Controller
 {
     public function __construct(
-        private readonly CourseLanguageRepository $r_course_language
+        private readonly CourseLevelRepository $r_course_level
     )
     {}
 
@@ -22,9 +22,9 @@ class CourseLanguageController extends Controller
      */
     public function index(): View
     {
-        $languages = $this->r_course_language->paginate(15);
+        $levels = $this->r_course_level->paginate(15);
 
-        return view('admin.course.course-language.index', compact('languages'));
+        return view('admin.course.course-level.index', compact('levels'));
     }
 
     /**
@@ -32,7 +32,7 @@ class CourseLanguageController extends Controller
      */
     public function create(): View
     {
-        return view('admin.course.course-language.create');
+        return view('admin.course.course-level.create');
     }
 
     /**
@@ -42,57 +42,49 @@ class CourseLanguageController extends Controller
     {
         $validate = $request->validated();
 
-        $this->r_course_language->create([
+        $this->r_course_level->create([
             'name' => $validate['name'],
             'slug' => \Str::slug($validate['name']),
         ]);
 
         notyf()->success('Created Successfully');
 
-        return redirect()->route('admin.course-languages.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect()->route('admin.course-level.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CourseLanguage $course_language): View
+    public function edit(CourseLevel $course_level): View
     {
-        return view('admin.course.course-language.edit', compact('course_language'));
+        return view('admin.course.course-level.edit', compact('course_level'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateLevelRequest $request, string $id)
+    public function update(CreateLevelRequest $request, string $id): RedirectResponse
     {
         $validate = $request->validated();
 
-        $this->r_course_language->updateById($id, [
+        $this->r_course_level->updateById($id, [
             'name' => $validate['name'],
         ]);
 
         notyf()->success('Updated Successfully');
 
-        return redirect()->route('admin.course-languages.index');
+        return redirect()->route('admin.course-level.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CourseLanguage $course_language)
+    public function destroy(CourseLevel $course_level): ?JsonResponse
     {
         try {
-            $this->r_course_language->deleteById($course_language->id);
+            $this->r_course_level->deleteById($course_level->id);
 
-            notyf()->success('Deleted Successfully! ');
+            notyf()->success('Deleted Successfully!');
 
             return response()->json([
                 'message' => 'Deleted Successfully!',
