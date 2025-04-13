@@ -5,9 +5,9 @@
         <div class="container-xl">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Course Languages</h3>
+                    <h3 class="card-title">Course Levels</h3>
                     <div class="card-actions">
-                        <a href="{{ route('admin.course-languages.create') }}" class="btn btn-primary">
+                        <a href="{{ route('admin.course-levels.create') }}" class="btn btn-primary">
                             Add New
                         </a>
                     </div>
@@ -21,14 +21,14 @@
                             <th>Action</th>
                             </thead>
                             <tbody class="w-100">
-                                @forelse($languages as $language)
+                                @forelse($levels as $level)
                                     <tr>
-                                        <td>{{ $language->name }}</td>
-                                        <td>{{ $language->slug }}</td>
+                                        <td>{{ $level->name }}</td>
+                                        <td>{{ $level->slug }}</td>
                                         <td>
-                                            <a href="{{ route('admin.course-languages.edit', $language->id) }}" class="btn-sm btn-primary">Edit</a>
+                                            <a href="{{ route('admin.course-levels.edit', $level->id) }}" class="btn-sm btn-primary">Edit</a>
                                             <a
-                                                href="{{ route('admin.course-languages.destroy', $language->id) }}"
+                                                href="{{ route('admin.course-levels.destroy', $level->id) }}"
                                                 class="btn-sm btn-danger delete-item"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#modal-danger"

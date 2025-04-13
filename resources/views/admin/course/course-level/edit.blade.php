@@ -5,16 +5,16 @@
         <div class="container-xl">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Edit Language</h3>
+                    <h3 class="card-title">Edit Level</h3>
                     <div class="card-actions">
-                        <a href="{{ route('admin.course-languages.index') }}" class="btn btn-primary">
+                        <a href="{{ route('admin.course-levels.index') }}" class="btn btn-primary">
                             Back
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
                     <form
-                        action="{{ route('admin.course-languages.update', $course_language->id) }}"
+                        action="{{ route('admin.course-levels.update', $course_level->id) }}"
                         method="POST"
                     >
                         @csrf
@@ -26,8 +26,8 @@
                                 class="form-control"
                                 name="name"
                                 id="name"
-                                placeholder="Enter language name"
-                                value="{{ $course_language->name }}"
+                                placeholder="Enter level name"
+                                value="{{ $course_level->name }}"
                             >
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>

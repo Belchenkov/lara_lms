@@ -49,7 +49,7 @@ class CourseLevelController extends Controller
 
         notyf()->success('Created Successfully');
 
-        return redirect()->route('admin.course-level.index');
+        return redirect()->route('admin.course-levels.index');
     }
 
     /**
@@ -73,7 +73,7 @@ class CourseLevelController extends Controller
 
         notyf()->success('Updated Successfully');
 
-        return redirect()->route('admin.course-level.index');
+        return redirect()->route('admin.course-levels.index');
     }
 
     /**
