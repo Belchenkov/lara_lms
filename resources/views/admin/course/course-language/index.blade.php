@@ -44,6 +44,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <div class="mt-4">
+                            {{ $languages->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
