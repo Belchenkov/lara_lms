@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseLanguageController;
 use App\Http\Controllers\Admin\CourseLevelController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -67,5 +68,8 @@ Route::group([
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     Route::resource('course-languages', CourseLanguageController::class);
+
     Route::resource('course-levels', CourseLevelController::class);
+
+    Route::resource('course-categories', CourseCategoryController::class);
 });
