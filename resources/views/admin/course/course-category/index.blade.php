@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Course Categories</h3>
                     <div class="card-actions">
-                        <a href="{{ route('admin.course-languages.create') }}" class="btn btn-primary">
+                        <a href="{{ route('admin.course-categories.create') }}" class="btn btn-primary">
                             Add New
                         </a>
                     </div>
@@ -16,36 +16,36 @@
                     <div class="table-responsive table-primary">
                         <table class="table table-vcenter card-title">
                             <thead>
-                            <th>Name</th>
-                            <th>Slug</th>
-                            <th>Action</th>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th>Action</th>
                             </thead>
                             <tbody class="w-100">
-                            @forelse($languages as $language)
-                                <tr>
-                                    <td>{{ $language->name }}</td>
-                                    <td>{{ $language->slug }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.course-languages.edit', $language->id) }}" class="btn-sm btn-primary">Edit</a>
-                                        <a
-                                            href="{{ route('admin.course-languages.destroy', $language->id) }}"
-                                            class="btn-sm btn-danger delete-item"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#modal-danger"
-                                        >
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center">No Data Found!</td>
-                                </tr>
-                            @endforelse
+                                @forelse($categories as $category)
+                                    <tr>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->slug }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.course-categories.edit', $category->id) }}" class="btn-sm btn-primary">Edit</a>
+                                            <a
+                                                href="{{ route('admin.course-categories.destroy', $category->id) }}"
+                                                class="btn-sm btn-danger delete-item"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modal-danger"
+                                            >
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3" class="text-center">No Data Found!</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                         <div class="mt-4">
-                            {{ $languages->links() }}
+                            {{ $categories->links() }}
                         </div>
                     </div>
                 </div>

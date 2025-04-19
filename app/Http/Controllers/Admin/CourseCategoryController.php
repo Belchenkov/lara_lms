@@ -19,9 +19,9 @@ class CourseCategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('admin.course.course-category.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class CourseCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.course.course-category.edit');
     }
 
     /**
