@@ -16,10 +16,29 @@
                     <form action="{{ route('admin.course-categories.store') }}" method="post">
                         @csrf
                         <div class="row">
+                            <div class="col md-6">
+                                <x-input-block
+                                    name="image"
+                                    placeholder="Enter image"
+                                />
+                            </div>
+                            <div class="col md-6">
+                                <x-input-block
+                                    name="icon"
+                                    placeholder="Enter icon class name"
+                                />
+                            </div>
                             <div class="col md-12">
                                 <x-input-block
                                     name="name"
-                                    placeholder="Enter Category name"
+                                    placeholder="Enter name"
+                                />
+                            </div>
+                            <div class="col md-12">
+                                <x-input-toggle-block
+                                    name="show_at_tranding"
+                                    label="Make trading"
+                                    checked="true"
                                 />
                             </div>
                         </div>
