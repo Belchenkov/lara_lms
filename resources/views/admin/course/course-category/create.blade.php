@@ -17,9 +17,8 @@
                         @csrf
                         <div class="row">
                             <div class="col md-6">
-                                <x-input-block
+                                <x-input-file-block
                                     name="image"
-                                    placeholder="Enter image"
                                 />
                             </div>
                             <div class="col md-6">
@@ -34,11 +33,16 @@
                                     placeholder="Enter name"
                                 />
                             </div>
-                            <div class="col md-12">
+                            <div class="col md-3">
                                 <x-input-toggle-block
-                                    name="show_at_tranding"
-                                    label="Make trading"
-                                    checked="true"
+                                    name="show_at_trading"
+                                    label="Show at trading"
+                                />
+                            </div>
+                            <div class="col md-3">
+                                <x-input-toggle-block
+                                    name="status"
+                                    label="Status"
                                 />
                             </div>
                         </div>

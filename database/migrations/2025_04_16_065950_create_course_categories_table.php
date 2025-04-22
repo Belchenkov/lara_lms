@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->foreignId('parent_id')->nullable();
-            $table->boolean('show_at_trending')->default(false);
+            $table->boolean('show_at_trading')->default(false);
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
