@@ -6,6 +6,7 @@
             class="form-check-input"
             name="{{ $name }}"
             @checked($checked)
+            value="1"
         />
         <span class="form-check-label"></span>
     </label>

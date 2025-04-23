@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Courses\CourseCategorySaveRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -27,9 +28,11 @@ class CourseCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CourseCategorySaveRequest $request): void
     {
-        //
+        $validate = $request->validated();
+
+
     }
 
     /**
