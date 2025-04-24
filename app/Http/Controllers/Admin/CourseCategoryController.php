@@ -4,11 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Courses\CourseCategorySaveRequest;
+use App\Repositories\CourseCategoryRepository;
+use App\Traits\FileUpload;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CourseCategoryController extends Controller
 {
+    use FileUpload;
+
+    public function __construct(
+        private readonly CourseCategoryRepository $r_course_category
+    )
+    {}
+
     /**
      * Display a listing of the resource.
      */
@@ -27,12 +37,26 @@ class CourseCategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @throws \Exception
      */
-    public function store(CourseCategorySaveRequest $request): void
+    public function store(CourseCategorySaveRequest $request): RedirectResponse
     {
         $validate = $request->validated();
 
+        $image_path = $this->uploadFile($request->file('image'));
 
+        $this->r_course_category->create([
+            'name' => $validate['name'],
+            'icon' => $validate['icon'],
+            'slug' => \Str::slug($validate['name']),
+            'show_at_trading' => $validate['show_at_trading'] ?? 0,
+            'status' => $validate['status'] ?? 0,
+            'image' => $image_path,
+        ]);
+
+        notyf()->success('Created Successfully');
+
+        return to_route('admin.course-categories.index');
     }
 
     /**
