@@ -16,6 +16,7 @@ class InputBlock extends Component
         public string $label = '',
         public string $placeholder = '',
         public string $type = 'text',
+        public string $value = '',
     )
     {}
 

@@ -19,17 +19,40 @@
                     >
                         @csrf
                         @method('PUT')
-                        <div class="mb-3">
-                            <label class="form-label" for="name">Name</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                name="name"
-                                id="name"
-                                placeholder="Enter language name"
-                                value="{{ $course_category->name }}"
-                            >
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        <div class="row">
+                            <div class="col md-6">
+                                <x-input-file-block
+                                    name="image"
+                                />
+                            </div>
+                            <div class="col md-6">
+                                <x-input-block
+                                    name="icon"
+                                    placeholder="Enter icon class name"
+                                    :value="$course_category->icon"
+                                />
+                            </div>
+                            <div class="col md-12">
+                                <x-input-block
+                                    name="name"
+                                    placeholder="Enter name"
+                                    :value="$course_category->name"
+                                />
+                            </div>
+                            <div class="col md-3">
+                                <x-input-toggle-block
+                                    name="show_at_trading"
+                                    label="Show at trading"
+                                    :checked="$course_category->show_at_trading"
+                                />
+                            </div>
+                            <div class="col md-3">
+                                <x-input-toggle-block
+                                    name="status"
+                                    label="Status"
+                                    :checked="$course_category->status"
+                                />
+                            </div>
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-primary" type="submit">Update</button>
