@@ -9,4 +9,7 @@
         value="{{ $value }}"
     >
     <x-input-error :messages="$errors->get($name)" class="mt-2" />
+    @isset($hint)
+        {{ $hint }}
+    @endisset
 </div>
