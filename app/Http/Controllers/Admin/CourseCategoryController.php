@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Courses\CourseCategorySaveRequest;
+use App\Http\Requests\Courses\CourseCategoryUpdateRequest;
 use App\Models\CourseCategory;
 use App\Repositories\CourseCategoryRepository;
 use App\Traits\FileUpload;
@@ -72,10 +73,32 @@ class CourseCategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @throws \Exception
      */
-    public function update(Request $request, string $id)
+    public function update(CourseCategoryUpdateRequest $request, CourseCategory $course_category): RedirectResponse
     {
-        //
+        $validate = $request->validated();
+
+        $data = [
+            'name' => $validate['name'],
+            'icon' => $validate['icon'],
+            'slug' => \Str::slug($validate['name']),
+            'show_at_trading' => $validate['show_at_trading'] ?? 0,
+            'status' => $validate['status'] ?? 0,
+        ];
+
+        if ($request->hasFile('image')) {
+            $image_path = $this->uploadFile($request->file('image'));
+            $data['image'] = $image_path;
+
+            $this->deleteFile($course_category->image);
+        }
+
+        $this->r_course_category->updateById($course_category->id, $data);
+
+        notyf()->success('Updated Successfully');
+
+        return to_route('admin.course-categories.index');
     }
 
     /**
