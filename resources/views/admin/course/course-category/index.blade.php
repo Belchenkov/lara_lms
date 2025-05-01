@@ -44,8 +44,18 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.course-categories.edit', $category->id) }}"
-                                           class="btn-sm btn-primary">Edit</a>
+                                        <a
+                                           href="{{ route('admin.course-categories.edit', $category->id) }}"
+                                           class="btn-sm btn-warning text-warning"
+                                        >
+                                            Info
+                                        </a>
+                                        <a
+                                           href="{{ route('admin.course-categories.edit', $category->id) }}"
+                                           class="btn-sm btn-primary"
+                                        >
+                                            Edit
+                                        </a>
                                         <a
                                             href="{{ route('admin.course-categories.destroy', $category->id) }}"
                                             class="btn-sm btn-danger delete-item"
