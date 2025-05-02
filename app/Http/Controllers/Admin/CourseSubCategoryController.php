@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CourseCategory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class CourseSubCategoryController extends Controller
@@ -10,9 +12,9 @@ class CourseSubCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(CourseCategory $course_category): View
     {
-        //
+        return view('admin.course.course-sub-category.index', compact('course_category'));
     }
 
     /**

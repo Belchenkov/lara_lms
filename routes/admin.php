@@ -74,5 +74,5 @@ Route::group([
 
     Route::resource('course-categories', CourseCategoryController::class);
 
-    Route::get('{course-category}/sub-categories', [CourseSubCategoryController::class, 'index'])->name('course-sub-categories');
+    Route::get('{course-category}/sub-categories', [CourseSubCategoryController::class, 'index'])->name('course-sub-categories.index');
 });
